@@ -37,7 +37,7 @@ function goTologin(){
    let validateResult =validateForm();
     //setErrorlist(validateResult.error.details)
     let {data}=await axios.post("http://localhost:3000/api/v1/auth/signup",User);
-   if(data.message=="done" ){
+   if(data.message==="done" ){
      goTologin();
 
     }
@@ -47,7 +47,7 @@ function goTologin(){
   }
   function validateForm(){
     const schema=Joi.object({
-     userName:Joi. string().alphanum().min(4).max(10).required(),
+     userName:Joi.string().alphanum().min(4).max(10).required(),
      email:Joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
      password:Joi.string().required(),
      cpassword: Joi.ref('password'),

@@ -18,7 +18,7 @@ function Login({ setUserData }) {
   let submitFormData = async (e) => {
     e.preventDefault();
     let { data } = await axios.post("http://localhost:3000/api/v1/auth/signin",user);
-    if (data.message == "login") {
+    if (data.message === "login") {
       setErrorMsg("");
       setLoading(true);
       localStorage.setItem("token", data.loginToken);

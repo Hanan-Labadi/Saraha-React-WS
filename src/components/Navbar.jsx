@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/logo300.png";
 function Navbar({ loginData }) {
-  console.log("navbar", loginData);
+  
   return (
     <nav className="navbar navbar-expand-lg bg-custom navbar-dark">
       <div className="container">
