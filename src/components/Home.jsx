@@ -1,10 +1,18 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 function Home() {
  
- 
+  let navigate = useNavigate();
+ function sendToProfile(name,id){
+  navigate({
+    pathname:`useraccount`,
+    search:`?name=${name}`,
+  })
+ }
 
   let [allUsers,setAllUsers]= useState([]);
  async function getAllUsers(){
@@ -36,8 +44,9 @@ let [query , setQuery] = useState("");
           <input type="text" onChange={e=>setQuery(e.target.value)}   className="form-control"  placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"  />
         </div>
         {
-           allUsers.filter(user=>user.userName.toLowerCase().includes(query)).map((name)=>
-          <h2>{name.userName}</h2>
+           allUsers.filter(user=>user.userName.toLowerCase().includes(query)).map((user,id)=>
+          // <Link  to="profile">  </Link>
+          <p key={user._id} onClick={()=> sendToProfile( user.userName , user._id )}>{user.userName}</p>
           )
         }
       </div>

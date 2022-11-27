@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/logo300.png";
-function Navbar({ loginData }) {
+function Navbar({ loginData , logout}) {
   
   return (
     <nav className="navbar navbar-expand-lg bg-custom navbar-dark">
@@ -26,7 +26,12 @@ function Navbar({ loginData }) {
             {loginData ? (
               <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">
+                    <Link className="nav-link" to="profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="messages">
                       Messages
                     </Link>
                   </li>
@@ -36,7 +41,7 @@ function Navbar({ loginData }) {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">
+                    <Link className="nav-link" onClick={logout}>
                       Logout
                     </Link>
                   </li>

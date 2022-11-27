@@ -7,6 +7,7 @@ function Login({ setUserData }) {
     password: "",
     email: "",
   });
+  
   let [loading, setLoading] = useState(false);
   let [errorMsg, setErrorMsg] = useState("");
 
@@ -24,6 +25,7 @@ function Login({ setUserData }) {
       localStorage.setItem("token", data.loginToken);
       setUserData();
       goToUserAccount();
+      
     } else {
       setLoading(false);
       setErrorMsg("Incorrect Email or Password ");

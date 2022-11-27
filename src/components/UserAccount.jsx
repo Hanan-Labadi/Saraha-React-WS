@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from "../img/avatar.png";
-export default function UserAccount() {
+import { useSearchParams } from 'react-router-dom';
+
+export default function UserAccount({allUsers}) {
+
+  let [searchParams,setSearchParams] = useSearchParams();
+   let firstName=searchParams.get('name');
+   
+  console.log(allUsers);
+ 
+  
   return (
+
+
 <div>
+
   
   <div className="container text-center py-5 my-5 text-center">
     <div className="card py-5 mb-5">
       <a  data-toggle="modal" data-target="#profile">
         <img src={Avatar} className="avatar " alt="avatar" />
       </a>
-      <h3 className="py-2">Ahmed Abd Al-Muti</h3>
+      <h3 className="py-2">{firstName}</h3>
       <div className="container w-50 m-auto">
         <form  method="post">
           <textarea className="form-control"  cols={10} rows={9} placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)" defaultValue={""} />
