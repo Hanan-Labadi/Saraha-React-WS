@@ -4,24 +4,54 @@ import React, { useEffect, useState } from 'react';
 
 
 function ReceivedMessages() {
-  let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2Y1YTU0OGIyMzVmYjAzZmIxNjE3NiIsImlzTG9nZ2luIjp0cnVlLCJpYXQiOjE2Njk3NjQyMzJ9.MHMWptbqXxMXBc0B8sWwgyJiTr3KoBISYcEIuWHxRMo`
+  let token = localStorage.getItem("token");
   let [messageList,setMessageList]=useState([]);
 
   async function getMsg(){
-       await axios.get(`//localhost:3000/api/v1/message/`,{headers:{authorization:`tariq__${token}`}})
-      .then (res=> {let{data}= res
-        setMessageList(data.messageList)
+       await axios.get(`http://localhost:3000/api/v1/message/`,{headers:{authorization:`tariq__${token}`}})
+      .then ((res)=> 
+      {let{data}= res;
+        setMessageList(data.messageList);
       })
-      .catch(err=>{
+      .catch((err)=>{
         console.log(err);
       })
     }
   useEffect(()=>{
     getMsg();
-  })
+  },[messageList]);
+
+  async function deleteMsg(idMsg){
+    await axios.delete(`http://localhost:3000/api/v1/message/${idMsg}`,{headers:{authorization:`tariq__${token}`},params:{authorization:`tariq__${token}`}})
+    .then (()=> 
+    {console.log("The message was deleted")
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
   return (
       <>
-      <table className="table w-75" >
+      <div className='d-flex flex-wrap align-items-center justify-content-center'>{
+      messageList.map((message,id)=> { 
+        return <div className="card text-center my-5  w-25 mx-4 " key={message._id}>
+  <div className="card-header bg-color">
+    Message {id+1}
+  </div>
+  <div className="card-body">
+    <p className="card-text msg-content">{message.text}</p>
+    <button type="button" className="btn btn-danger" onClick={()=>deleteMsg(message._id)}>Delete</button>
+  </div>
+  <div className="card-footer text-muted ">
+  {message.createdAt}
+  </div>
+
+
+      </div>})
+          
+      }</div>
+      
+      {/* <table className="table w-75 " >
         <thead>
            <tr>
             <th scope="col">id</th>
@@ -37,11 +67,11 @@ function ReceivedMessages() {
              <td>{id}</td>
              <td>{message.text}</td>
              <td>{message.createdAt}</td>
-             <td><button type="button" class="btn btn-danger">Delete</button></td>
+             <td><button type="button" className="btn btn-danger" onClick={()=>deleteMsg(message._id)}>Delete</button></td>
            </tr>)
           }
           </tbody>                   
-        </table>
+        </table> */}
       </>
       
     

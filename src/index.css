@@ -54,3 +54,11 @@ body {
   width: 40%;
   margin-top: 20px;
 }
+.msg-content{
+  height: 100px;
+  overflow:auto;
+}
+.bg-color{
+  background-color: #10bbb3;
+  color: #fff;
+}
