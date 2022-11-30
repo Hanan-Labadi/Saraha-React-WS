@@ -4,12 +4,13 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
-import Profile from "./components/Profile";
+import ReceivedMessages from "./components/ReceivedMessages";
 import Protected from "./components/Protected";
 import Messages from "./components/Messages";
+import AllUsers from "./components/AllUsers";
 import { Navigate, Route, Routes } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import UserAccount from './components/UserAccount';
+import SendMessage from './components/SendMessage';
 import axios from "axios";
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
  async function getAllUsers(){
   let {data}=await axios.get("http://localhost:3000/api/v1/auth/allusers");
   setAllUsers(data.users);
+  // console.log(data.users);
+ 
  }
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -44,12 +47,14 @@ function App() {
       <Navbar loginData={loginData} logout={logout}/>
       <Routes>
         <Route element={<Protected loginData={loginData} />}>
-          <Route path="profile" element={<Profile  />}></Route>
+          <Route path="receivedmessages" element={<ReceivedMessages  />}></Route>
           <Route path="messages" element={<Messages  />}></Route>
+          <Route path="allusers" element={<AllUsers  />}></Route>
         </Route>
+        <Route path="home" element={<Home />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="register" element={<Register />}></Route>
-        <Route path="useraccount" element={<UserAccount allUsers={allUsers} />}></Route>
+        <Route path="sendmessage" element={<SendMessage allUsers={allUsers} />}></Route>
         <Route path="login" element={<Login setUserData={setUserData} />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

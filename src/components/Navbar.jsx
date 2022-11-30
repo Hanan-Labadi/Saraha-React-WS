@@ -26,13 +26,13 @@ function Navbar({ loginData , logout}) {
             {loginData ? (
               <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="profile">
-                      Profile
+                    <Link className="nav-link" to="receivedmessages">
+                    Received Messages
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="messages">
-                      Messages
+                    <Link className="nav-link" to="allusers">
+                      Show All Users
                     </Link>
                   </li>
                   <li className="nav-item">

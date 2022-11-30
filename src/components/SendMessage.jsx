@@ -1,31 +1,43 @@
 import React, { useState } from 'react'
 import Avatar from "../img/avatar.png";
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+function SendMessage({allUsers}) {
 
-export default function UserAccount({allUsers}) {
-
-  let [searchParams,setSearchParams] = useSearchParams();
-   let firstName=searchParams.get('name');
-   
-  console.log(allUsers);
  
+  let [searchParams, setSearchParams]= useSearchParams();
+  let [text,setText]= useState('');
+  let userId=searchParams.get('id');
+   let targetID;
+   let userNAme;
+  allUsers.filter((ele)=>{
+    if(ele._id===userId){
+      targetID=ele._id;
+      userNAme=ele.userName;
+    }
+  });
+
+   let sendMsg =async (e)=>{
+    e.preventDefault();
+      let {data} =await axios.post(`http://localhost:3000/api/v1/message/${targetID}`, {text:text});
+      console.log(data)
+  }
   
+  function handelText(e){
+    setText(e.target.value);
+  }
   return (
-
-
 <div>
-
-  
   <div className="container text-center py-5 my-5 text-center">
     <div className="card py-5 mb-5">
       <a  data-toggle="modal" data-target="#profile">
         <img src={Avatar} className="avatar " alt="avatar" />
       </a>
-      <h3 className="py-2">{firstName}</h3>
+      <h3 className="py-2">{userNAme}</h3>
       <div className="container w-50 m-auto">
         <form  method="post">
-          <textarea className="form-control"  cols={10} rows={9} placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)" defaultValue={""} />
-          <button className="btn btn-outline-info mt-3"><i className="far fa-paper-plane" /> Send</button>
+          <textarea onChange={(e)=>handelText(e)} className="form-control"  cols={10} rows={9} placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)" defaultValue={""} />
+          <button  onClick={(e)=>sendMsg(e)}  className="btn btn-outline-info mt-3"><i className="far fa-paper-plane" /> Send</button>
         </form>
       </div>
     </div>
@@ -53,3 +65,5 @@ export default function UserAccount({allUsers}) {
 
   )
 }
+
+export default SendMessage
