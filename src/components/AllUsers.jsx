@@ -26,7 +26,7 @@ function AllUsers() {
     <>
         <div className="input-group mb-3 search">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">@</span>
+            <span className="input-group-text" id="basic-addon1"> Search for Someone</span>
           </div>
           <input type="text" onChange={e=>setQuery(e.target.value)}   className="form-control"  placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"  />
         </div>
@@ -41,7 +41,7 @@ function AllUsers() {
                         allUsers.filter(user=>user.userName.toLowerCase().includes(query)).map((user,id)=>
                         <tbody>
                         <td> {user.userName}</td>
-                        <td key={user._id} onClick={()=> sendToProfile( user._id )}><button> send</button></td>
+                        <td key={user._id} onClick={()=> sendToProfile( user._id )}><button type="button" class="btn btn-info">Send a Message</button></td>
                         </tbody>
                         )
                     }

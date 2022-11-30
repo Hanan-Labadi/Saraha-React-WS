@@ -16,15 +16,32 @@ function ReceivedMessages() {
         console.log(err);
       })
     }
-    console.log(messageList[0].id);
   useEffect(()=>{
     getMsg();
   })
   return (
       <>
-      {
-        messageList[0]
-      }
+      <table className="table w-75" >
+        <thead>
+           <tr>
+            <th scope="col">id</th>
+            <th scope="col">messsage</th>
+            <th scope="col">message time</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+         {
+           messageList.map((message,id)=>
+           <tr key={message._id}>
+             <td>{id}</td>
+             <td>{message.text}</td>
+             <td>{message.createdAt}</td>
+             <td><button type="button" class="btn btn-danger">Delete</button></td>
+           </tr>)
+          }
+          </tbody>                   
+        </table>
       </>
       
     
