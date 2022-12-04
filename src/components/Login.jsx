@@ -67,7 +67,7 @@ function Login({ setUserData }) {
             {loading ? (<i className="fa-solid fa-spinner fa-spin"></i>) : ("Login")}
           </button>
           <p>
-            <a className="text-muted forgot btn">I Forgot My Password</a>
+            <Link to={"/forgetpassword"}  className="text-muted forgot btn">I Forgot My Password</Link>
           </p>
           <Link className="btn btn-default-outline" to="/register">
             Register

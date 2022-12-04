@@ -8,6 +8,8 @@ import ReceivedMessages from "./components/ReceivedMessages";
 import Protected from "./components/Protected";
 import Messages from "./components/Messages";
 import AllUsers from "./components/AllUsers";
+import ForgetPassword from "./components/ForgetPassword";
+import ReceivedCode from "./components/ReceivedCode";
 import { Navigate, Route, Routes } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import SendMessage from './components/SendMessage';
@@ -54,6 +56,8 @@ function App() {
         <Route path="home" element={<Home />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="register" element={<Register />}></Route>
+        <Route path="ReceivedCode" element={<ReceivedCode />}></Route>
+        <Route path="ForgetPassword" element={<ForgetPassword />}></Route>
         <Route path="sendmessage" element={<SendMessage allUsers={allUsers} />}></Route>
         <Route path="login" element={<Login setUserData={setUserData} />}></Route>
         <Route path="*" element={<NotFound />}></Route>
