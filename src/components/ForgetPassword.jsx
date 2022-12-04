@@ -1,19 +1,31 @@
 import axios from 'axios';
 import React from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom'
 
 function ForgetPassword() {
-
+  let [emailInfo,setEailInfo]=useState('');
+  let navigate = useNavigate();
+    function getEmailInfo(e){
+      emailInfo=e.target.value;
+    }
+    function goToReceivedCode(){
+      let path = '/ReceivedCode';
+      navigate(path)
+    }
     async function forgetPassword(e){
-        e.preventDefult()
-        await axios.patch(`http://localhost:3000/api/v1/auth/sendCode`,{email:"m2men1999@gmail.com"})
+      e.preventDefault();
+        await axios.patch(`http://localhost:3000/api/v1/auth/sendCode`,{email:emailInfo})
         .then ((res)=> 
-        {let {data}=res; console.log(res)
+        {let {data}=res; console.log(data)
         })
         .catch((err)=>{
           console.log(err);
         })
+        goToReceivedCode()
       }
+
   return (
     <div className="container text-center my-5">
     <div className="user my-3">
@@ -26,7 +38,7 @@ function ForgetPassword() {
         <input
           className="form-control"
           placeholder="Enter your email"
-          
+          onChange={getEmailInfo}
           type="text"
           name="email"
         />
