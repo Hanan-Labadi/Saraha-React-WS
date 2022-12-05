@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 function ForgetPassword() {
   let [emailInfo,setEailInfo]=useState('');
   let navigate = useNavigate();
+  let[errMsg,setErrMsg]=useState('');
+
     function getEmailInfo(e){
       emailInfo=e.target.value;
     }
@@ -18,12 +20,15 @@ function ForgetPassword() {
       e.preventDefault();
         await axios.patch(`http://localhost:3000/api/v1/auth/sendCode`,{email:emailInfo})
         .then ((res)=> 
-        {let {data}=res; console.log(data)
+        {let {data}=res; 
+        if(data.message==='Done , plz check your Email To Change Password'){
+          goToReceivedCode();
+        }else{
+          setErrMsg(data.message);
+        }
         })
-        .catch((err)=>{
-          console.log(err);
-        })
-        goToReceivedCode()
+        
+        
       }
 
   return (
@@ -35,6 +40,7 @@ function ForgetPassword() {
 
     <div className="card p-5 w-50 m-auto">
       <form method="POST" action="/handleLogin">
+        {<div className='error-Msg'> <p className='mx-5  bg-danger rounded-pill '>{errMsg}</p>  </div>}
         <input
           className="form-control"
           placeholder="Enter your email"

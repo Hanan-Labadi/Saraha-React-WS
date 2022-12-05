@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import swal from 'sweetalert';
 
 function ReceivedMessages() {
   let token = localStorage.getItem("token");
@@ -22,13 +22,31 @@ function ReceivedMessages() {
   },[messageList]);
 
   async function deleteMsg(idMsg){
-    await axios.delete(`http://localhost:3000/api/v1/message/${idMsg}`,{headers:{authorization:`tariq__${token}`},params:{authorization:`tariq__${token}`}})
-    .then (()=> 
-    {console.log("The message was deleted")
+     swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-    .catch((err)=>{
-      console.log(err);
-    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        await axios.delete(`http://localhost:3000/api/v1/message/${idMsg}`,{headers:{authorization:`tariq__${token}`},params:{authorization:`tariq__${token}`}});
+        swal("Poof! Your imaginary file has been deleted!", {
+          
+          icon: "success",
+        });
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+    // await axios.delete(`http://localhost:3000/api/v1/message/${idMsg}`,{headers:{authorization:`tariq__${token}`},params:{authorization:`tariq__${token}`}})
+    // .then (()=> 
+    // {console.log("The message was deleted")
+    // })
+    // .catch((err)=>{
+    //   console.log(err);
+    // })
   }
   return (
       <>

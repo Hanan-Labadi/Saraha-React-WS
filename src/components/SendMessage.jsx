@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import Avatar from "../img/avatar.png";
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 function SendMessage({allUsers}) {
 
- 
+  
   let [searchParams, setSearchParams]= useSearchParams();
   let [text,setText]= useState('');
   let userId=searchParams.get('id');
@@ -20,11 +21,19 @@ function SendMessage({allUsers}) {
    let sendMsg =async (e)=>{
     e.preventDefault();
       let {data} =await axios.post(`http://localhost:3000/api/v1/message/${targetID}`, {text:text});
-      console.log(data)
+        swal({
+          title: "Success!",
+          text: "Your message was sent successfully!",
+          icon: "success",
+          button: "DONE!",
+        });
+      
+      
   }
   
   function handelText(e){
     setText(e.target.value);
+   
   }
   return (
 <div>

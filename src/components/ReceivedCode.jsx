@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { func } from 'joi';
 import React from 'react'
 import { useState } from 'react';
-
+import swal from 'sweetalert';
 function ReceivedCode() {
   let[newPw,setNewPw]=useState('');
   let[coode,setCode]=useState('');
@@ -12,23 +11,24 @@ function ReceivedCode() {
     await axios.patch('http://localhost:3000/api/v1/auth/forgetpassword', {email:mail,code:coode,password:newPw})
     .then((res)=>{
       let {data}=res;
-      console.log(data);
-    }).catch((err)=>{
-      console.log(err)
+      swal({
+        title: "Success!",
+        text: "Your password is updated",
+        icon: "success",
+        button: "DONE!",
+      });
     })
   }
   function getNewPw(e){
     newPw=e.target.value;
-    console.log(newPw)
+    
 
   }
   function getMail(e){
-    mail=e.target.value;
-    console.log(mail)
+    mail=e.target.value; 
   }
   function getCode(e){
     coode=e.target.value;
-    console.log(coode)
   }
 
   return (
@@ -50,7 +50,7 @@ function ReceivedCode() {
         />
 
         <input
-          className="form-control"
+          className="form-control mt-2"
           placeholder="Enter your  Code"
           type="text"
           name="email"
@@ -58,7 +58,7 @@ function ReceivedCode() {
         />
 
         <input
-          className="form-control"
+          className="form-control mt-2"
           placeholder="Enter your new Password"
           type="text"
           name="email"
