@@ -11,3 +11,30 @@ function Protected({loginData}) {
 }
 
 export default Protected
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let flag;
+//   async function isLogin(){
+//      flag = await loginData;
+//      return flag;
+//   }

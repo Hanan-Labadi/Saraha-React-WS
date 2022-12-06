@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 
 function ReceivedMessages() {
-  let token = localStorage.getItem("token");
+  let token =  localStorage.getItem("token");
   let [messageList,setMessageList]=useState([]);
 
   async function getMsg(){
@@ -18,6 +18,7 @@ function ReceivedMessages() {
       })
     }
   useEffect(()=>{
+    
     getMsg();
   },[messageList]);
 

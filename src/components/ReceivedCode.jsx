@@ -1,22 +1,40 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 function ReceivedCode() {
   let[newPw,setNewPw]=useState('');
   let[coode,setCode]=useState('');
   let[mail,setMail]=useState('');
+  let navigate = useNavigate();
+  function login() {
+    let path = "/login";
+    navigate(path);
+  }
   async function updatePass(e){
     e.preventDefault();
     await axios.patch('http://localhost:3000/api/v1/auth/forgetpassword', {email:mail,code:coode,password:newPw})
     .then((res)=>{
       let {data}=res;
-      swal({
+      console.log(data.message);
+      if(data.message=="Done")
+      {swal({
         title: "Success!",
         text: "Your password is updated",
         icon: "success",
         button: "DONE!",
       });
+      login();
+    }else if(data.message=="In-valid account or In-valid OTP Code"){
+        swal({
+          title: "Fail!",
+          text: "In-valid account or In-valid OTP Code",
+          icon: "error",
+          button: "Cancel!",
+        });
+
+      }
     })
   }
   function getNewPw(e){

@@ -12,8 +12,8 @@ function Login({ setUserData }) {
   let [errorMsg, setErrorMsg] = useState("");
 
   let navigate = useNavigate();
-  function ReceivedMessages() {
-    let path = "/ReceivedMessages";
+  function profile() {
+    let path = "/profile";
     navigate(path);
   }
   let submitFormData = async (e) => {
@@ -24,7 +24,7 @@ function Login({ setUserData }) {
       setLoading(true);
       localStorage.setItem("token", data.loginToken);
       setUserData();
-      ReceivedMessages();
+      profile();
       
     } else {
       setLoading(false);

@@ -26,6 +26,11 @@ function Navbar({ loginData , logout}) {
             {loginData ? (
               <>
                   <li className="nav-item">
+                    <Link className="nav-link" to="profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to="receivedmessages">
                     Received Messages
                     </Link>
@@ -36,12 +41,7 @@ function Navbar({ loginData , logout}) {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">
-                      Settings
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" onClick={logout}>
+                    <Link className="nav-link" onClick={logout} to="/login">
                       Logout
                     </Link>
                   </li>
@@ -49,6 +49,11 @@ function Navbar({ loginData , logout}) {
               </>
             ) : (
               <>
+                <li className="nav-item">
+                    <Link className="nav-link" to="allusers">
+                      Show All Users
+                    </Link>
+                  </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="register">
                     Register

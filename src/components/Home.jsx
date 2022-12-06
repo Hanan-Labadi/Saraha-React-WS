@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="container text-center my-5">
+    <div className="container text-center my-5 ">
+      <div>
       <h4> Sarahah allows you to receive constructive feedback from your friends and co-workers </h4>
       <div className="buttons d-flex justify-content-center align-items-center  flex-column">
         <Link to="/login" className="btn btn-default-outline my-4">
@@ -12,6 +13,7 @@ function Home() {
         <Link to="/register" className="btn btn-default-outline">
           <i className="far fa-edit" /> Register
         </Link>
+      </div>
       </div>
     </div>
   );

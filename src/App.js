@@ -14,6 +14,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import SendMessage from './components/SendMessage';
 import axios from "axios";
+import Profile from './components/Profile';
 
 function App() {
 
@@ -26,14 +27,12 @@ function App() {
   function logout (){
     localStorage.removeItem('token');
     setLoginData(null);
-    Navigate('login');
   }
   let [allUsers,setAllUsers]= useState([]);
  async function getAllUsers(){
   let {data}=await axios.get("http://localhost:3000/api/v1/auth/allusers");
   setAllUsers(data.users);
   // console.log(data.users);
- 
  }
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -51,8 +50,9 @@ function App() {
         <Route element={<Protected loginData={loginData} />}>
           <Route path="receivedmessages" element={<ReceivedMessages  />}></Route>
           <Route path="messages" element={<Messages  />}></Route>
-          <Route path="allusers" element={<AllUsers  />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
         </Route>
+        <Route path="allusers" element={<AllUsers  />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="register" element={<Register />}></Route>

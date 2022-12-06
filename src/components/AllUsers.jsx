@@ -41,9 +41,11 @@ function AllUsers() {
             
                     {
                         allUsers.filter(user=>user.userName.toLowerCase().includes(query)).map((user,id)=>
-                        <tbody>
-                        <td className='w-50 text-center'> {user.userName}</td>
-                        <td className='w-50' key={user._id} onClick={()=> sendToProfile( user._id )}><button type="button" class="btn btn-info w-50">Send a Message</button></td>
+                        <tbody key={id}>
+                          <tr>
+                          <td className='w-50 text-center'> {user.userName}</td>
+                          <td className='w-50' key={user._id} onClick={()=> sendToProfile( user._id )}><button type="button" className="btn btn-info w-50">Send a Message</button></td>
+                          </tr>
                         </tbody>
                         )
                     }

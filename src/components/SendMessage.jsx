@@ -27,6 +27,8 @@ function SendMessage({allUsers}) {
           icon: "success",
           button: "DONE!",
         });
+        document.getElementById("message").value="";
+      setText(document.getElementById("message").value);
       
       
   }
@@ -45,7 +47,7 @@ function SendMessage({allUsers}) {
       <h3 className="py-2">{userNAme}</h3>
       <div className="container w-50 m-auto">
         <form  method="post">
-          <textarea onChange={(e)=>handelText(e)} className="form-control"  cols={10} rows={9} placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)" defaultValue={""} />
+          <textarea onChange={(e)=>handelText(e)} id="message" name='message' className="form-control"  cols={10} rows={9} placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)" defaultValue={""} />
           <button  onClick={(e)=>sendMsg(e)}  className="btn btn-outline-info mt-3"><i className="far fa-paper-plane" /> Send</button>
         </form>
       </div>
