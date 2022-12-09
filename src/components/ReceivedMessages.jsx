@@ -2,6 +2,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import img from'./unnamed.png';
+
 
 function ReceivedMessages() {
   let token =  localStorage.getItem("token");
@@ -12,6 +14,12 @@ function ReceivedMessages() {
       .then ((res)=> 
       {let{data}= res;
         setMessageList(data.messageList);
+        if(data.messageList.length==0)
+
+        {
+display();
+console.log(data.messageList.length);
+        }
       })
       .catch((err)=>{
         console.log(err);
@@ -41,16 +49,19 @@ function ReceivedMessages() {
         swal("Your imaginary file is safe!");
       }
     });
-    // await axios.delete(`http://localhost:3000/api/v1/message/${idMsg}`,{headers:{authorization:`tariq__${token}`},params:{authorization:`tariq__${token}`}})
-    // .then (()=> 
-    // {console.log("The message was deleted")
-    // })
-    // .catch((err)=>{
-    //   console.log(err);
-    // })
+    
+  }
+  function display(){
+    let messageimg=document.querySelector(".our");
+    messageimg.classList.replace("d-none","d-inline")
   }
   return (
       <>
+      <div>
+
+<img src = {` ${img}`} alt="im" width={'400px'} height={'450px'} className='our d-none container mt-5'/>
+
+ </div>
       <div className='d-flex flex-wrap align-items-center justify-content-center'>{
       messageList.map((message,id)=> { 
         return <div className="card text-center my-5  w-25 mx-4 " key={message._id}>
